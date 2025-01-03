@@ -1,0 +1,85 @@
+Ease of Agent Creation
+What is the process for creating and deploying a new agent?
+
+Does it involve a graphical interface, command-line tools, or coding?
+How quickly can an agent be built and made operational?
+
+Are there tools or automations to simplify this process?
+Can agents be created by non-developers or less technical team members?
+
+Is there support for low-code or no-code creation?
+Does the solution support cloning existing agents for modification?
+
+How flexible is it for adapting agents to new use cases?
+
+
+  Template Standardization
+Does the solution follow a standardized templating system for defining workflows and agent logic?
+
+What format does it use (e.g., YAML, JSON, or code-based)?
+Are there pre-built templates available?
+
+Can these templates be extended or customized for specific use cases?
+How consistent are the templates across different agents and use cases?
+
+Are there mechanisms to ensure adherence to best practices?
+Are templates modular?
+
+Can components of one template (e.g., workflows, connectors) be reused in another?
+
+
+  Utilization of Connectors
+How does the solution handle connectors?
+
+Are connectors modular and reusable?
+What types of connectors are supported?
+
+Are there pre-existing connectors for databases, APIs, messaging systems, and other common platforms?
+What is the process for linking connectors to agents?
+
+Is this automatic, or does it require manual setup?
+What happens if a connector fails or becomes unavailable?
+
+Are there fallback or retry mechanisms?
+Can connectors be orchestrated for complex workflows?
+
+For example, can data flow from one connector trigger actions in another?
+
+
+  Support for Multiple LLMs
+Does the platform support multiple LLM providers like OpenAI, Bedrock, and Google Gemini?
+
+Are these integrations native, or do they require custom configurations?
+Can developers select and configure the LLM model as part of the agent's setup?
+
+Is the choice of model passed as a parameter or configuration?
+Is the platform flexible enough to support future LLMs or proprietary models?
+
+How easy is it to add support for new models?
+Ease of Configuration
+How do developers specify the LLM for an agent?
+
+Is it done through a configuration file, template, or UI?
+Can different agents use different LLMs within the same system?
+
+Does the platform allow for simultaneous usage of multiple LLM APIs?
+Are there abstractions or APIs that simplify switching between LLMs?
+
+Can developers try different LLMs without modifying the core agent logic?
+
+
+  Knowledge Sync and Vector Database Integration
+Does the platform support integration with vector databases?
+
+Which vector databases are supported (e.g., Pinecone, Weaviate, Chroma, Milvus)?
+Can it connect to multiple vector DBs simultaneously?
+How do agents interact with vector databases for knowledge retrieval?
+
+Is there built-in support for querying vector DBs for relevant embeddings?
+Does the platform provide abstractions to simplify RAG-based workflows?
+Can agents dynamically update or sync knowledge to the vector database?
+
+How is newly acquired knowledge stored and indexed for future use?
+Are there tools for managing and visualizing vector database contents?
+
+Can developers or admins inspect embeddings, indexes, and search results?
