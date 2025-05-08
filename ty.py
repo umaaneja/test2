@@ -1,46 +1,10 @@
- Key Activities:
-Canonical Content Model Development:
-Establish a unified, platform-neutral content structure from Drupal exports.
-
-Content Normalization and Mapping Rules:
-Define specific transformation rules for each target based on platform-specific needs.
-
-Multi-Format Content Transformation:
-Transform a single source into:
-
-Relational Data Models (Laravel)
-
-Markdown/Static Content Structures (Hugo)
-
-UI-friendly Content Chunks (No-API System)
-
-Metadata and Asset Strategy:
-Adapt SEO metadata, internal links, images, CSS references according to platform constraints.
-
-🔹 Application of Generative AI:
-Multi-Output Content Restructuring:
-Leverage Gen AI models to automatically reformat and serialize the same content into:
-
-DB Insert Scripts (for Laravel)
-
-Markdown Pages (for Hugo)
-
-UI Field Mapping Suggestions (for manual entry systems).
-
-Field Mapping Divergence Management:
-AI suggests different field mappings for each target based on platform-specific schema analysis.
-
-Intelligent Link Refactoring:
-Auto-rewrite internal links to fit the routing models of Laravel, Hugo, and No-API systems.
-
-Template and Layout Generation:
-For Hugo, auto-generate page templates (Markdown front matter + body).
-For Laravel, suggest Blade templates if needed.
-
-✅ Net Time Reduction:
-~60% overall efficiency improvement across content transformation workflows.
-
-✅ Quality Improvement:
-Reduces formatting, SEO, and routing errors by 40–50%.
+Visual Regression Testing	Detect layout/UI mismatches between old and new sites.
+Content Integrity Checks	Verify migrated text, media, and metadata accuracy.
+Dependency Validation	Confirm JS, CSS, and libraries load correctly.
+Adobe Analytics Testing	Validate tag firing for events and page views.
+Broken Link Testing	Identify and fix broken internal/external links.
+Redirection Validation	Ensure old URLs redirect properly to new URLs.
+Tagging and Metadata Verification	Check SEO tags, structured data, and marketing scripts.
 
 
+ Gen AI will not only detect issues but also recommend or generate fixes, increasing overall QA efficiency by 60–65%
