@@ -1,36 +1,46 @@
-Key Activities:
-Export Content Nodes, Media Assets, Redirect Rules from Drupal.
+ Key Activities:
+Canonical Content Model Development:
+Establish a unified, platform-neutral content structure from Drupal exports.
 
-Systematically extract Forms including field definitions, validations, and workflows.
+Content Normalization and Mapping Rules:
+Define specific transformation rules for each target based on platform-specific needs.
 
-Identify and catalog Custom Modules, Embedded PHP Logic, and hidden business workflows.
+Multi-Format Content Transformation:
+Transform a single source into:
 
-Perform Data Cleaning and normalization across all extracted assets.
+Relational Data Models (Laravel)
 
-Build initial Mapping Frameworks for Content Types, Forms, and Custom Functionalities.
+Markdown/Static Content Structures (Hugo)
 
-Conduct Preliminary Microservice Candidate Identification.
+UI-friendly Content Chunks (No-API System)
+
+Metadata and Asset Strategy:
+Adapt SEO metadata, internal links, images, CSS references according to platform constraints.
 
 🔹 Application of Generative AI:
-Content Type and Form Classification:
-Auto-classify Drupal nodes, forms, and components into logical business groupings.
+Multi-Output Content Restructuring:
+Leverage Gen AI models to automatically reformat and serialize the same content into:
 
-Field and Workflow Mapping Recommendation:
-AI models propose mappings from source fields to new CMS fields or builder modules.
+DB Insert Scripts (for Laravel)
 
-Automated Data Integrity and Workflow Validation:
-Scan extracted content/forms to flag anomalies, incomplete records, broken references.
+Markdown Pages (for Hugo)
 
-Custom Logic Complexity Assessment:
-Analyze custom modules to detect complex workflows requiring microservice abstraction.
+UI Field Mapping Suggestions (for manual entry systems).
 
-API Contract Skeleton Generation:
-Auto-generate preliminary API contract templates based on identified service candidates.
+Field Mapping Divergence Management:
+AI suggests different field mappings for each target based on platform-specific schema analysis.
 
+Intelligent Link Refactoring:
+Auto-rewrite internal links to fit the routing models of Laravel, Hugo, and No-API systems.
 
-  ✅ Net Time Reduction:
-~60–65% overall phase efficiency improvement.
+Template and Layout Generation:
+For Hugo, auto-generate page templates (Markdown front matter + body).
+For Laravel, suggest Blade templates if needed.
+
+✅ Net Time Reduction:
+~60% overall efficiency improvement across content transformation workflows.
 
 ✅ Quality Improvement:
+Reduces formatting, SEO, and routing errors by 40–50%.
 
-Early complexity visibility reduces rework by 30–40% in later phases.
+
