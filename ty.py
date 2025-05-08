@@ -1,41 +1,36 @@
-Tasks:
-Audit Content Types, Views, Forms, Custom Modules, Assets
+Key Activities:
+Export Content Nodes, Media Assets, Redirect Rules from Drupal.
 
-Complexity Classification
+Systematically extract Forms including field definitions, validations, and workflows.
+
+Identify and catalog Custom Modules, Embedded PHP Logic, and hidden business workflows.
+
+Perform Data Cleaning and normalization across all extracted assets.
+
+Build initial Mapping Frameworks for Content Types, Forms, and Custom Functionalities.
+
+Conduct Preliminary Microservice Candidate Identification.
+
+🔹 Application of Generative AI:
+Content Type and Form Classification:
+Auto-classify Drupal nodes, forms, and components into logical business groupings.
+
+Field and Workflow Mapping Recommendation:
+AI models propose mappings from source fields to new CMS fields or builder modules.
+
+Automated Data Integrity and Workflow Validation:
+Scan extracted content/forms to flag anomalies, incomplete records, broken references.
+
+Custom Logic Complexity Assessment:
+Analyze custom modules to detect complex workflows requiring microservice abstraction.
+
+API Contract Skeleton Generation:
+Auto-generate preliminary API contract templates based on identified service candidates.
 
 
-Audit existing Drupal site:
+  ✅ Net Time Reduction:
+~60–65% overall phase efficiency improvement.
 
-List of Content Types (Pages, Blogs, Articles, etc.)
+✅ Quality Improvement:
 
-List of Entities (Users, Files, Media, Taxonomy Terms)
-
-List of Views, Custom Modules, Forms, Blocks
-
-List of JS, CSS assets
-
-Identify Site Features:
-
-Custom Redirects
-
-Cron Jobs
-
-Access Control (Roles, Permissions)
-
-Categorize complexity:
-
-Easy (Simple pages, simple forms)
-
-Medium (Blocks, views, content relationships)
-
-Complex (Custom modules, custom forms, dynamic blocks)
-
-Gen AI Usage:
-Auto-summarize Drupal site export.
-
-Categorize modules and entities into Easy / Medium / Complex.
-
-Suggest risk assessment scores.
-
-✅ Efficiency Gain:
-Save 50–60% time on manual site auditing.
+Early complexity visibility reduces rework by 30–40% in later phases.
