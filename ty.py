@@ -1,16 +1,14 @@
-Slide 1: Introduction & Current Engagement
-SupportModel Overview
+Tasks:
+Audit Content Types, Views, Forms, Custom Modules, Assets
 
-Partnering with the client's teams to drive GenAI adoption.
+Complexity Classification
 
-Focus: Helping accelerate website generation using GenAI technologies.
+Gen AI Usage:
+Auto-summarize Drupal site export.
 
-Client Situation
+Categorize modules and entities into Easy / Medium / Complex.
 
-Support Team → Already aligned with another vendor for Custom GenAI Solutions.
+Suggest risk assessment scores.
 
-Development Team → Looking for COTS GenAI Solutions for quick adoption.
-
-SupportModel Role
-
-Supporting client in evaluating, adapting, and implementing COTS-based GenAI tools, especially for Development and broader initiatives.
+✅ Efficiency Gain:
+Save 50–60% time on manual site auditing.
