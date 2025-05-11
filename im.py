@@ -1,36 +1,26 @@
-image_service.py
+from app.services.image_service import ImageService
 
-
-from sqlalchemy.orm import Session
-from app.models.image import Image
-from app.crud.image import (
-    get_image,
-    update_image_llm_data,
-    get_images_by_project
-)
-
-class ImageService:
+class LLMService:
     def __init__(self, db: Session):
-        self.db = db
+        self.image_service = ImageService(db)
 
-    async def update_llm_status(
-        self,
-        image_id: int,
-        llm_response: str,
-        is_success: bool = True
-    ) -> bool:
-        """Updates LLM processing status (internal use only)"""
-        updated = await update_image_llm_data(
-            db=self.db,
-            image_id=image_id,
-            llm_processed=is_success,
-            llm_response=llm_response
-        )
-        return updated is not None
-
-    async def get_unprocessed_images(self, project_id: int) -> list[Image]:
-        """For LLM service to fetch images needing processing"""
-        return get_images_by_project(
-            db=self.db,
-            project_id=project_id
-        ).filter(Image.llm_processed == False).all()
+    async def process_images(self, project_id: int):
+        # Get only unprocessed images
+        images = await self.image_service.get_unprocessed_images(project_id)
+        
+        for image in images:
+            try:
+                # Your LLM processing logic
+                result = await self._call_llm_api(image.filepath)
+                
+                # Update status via ImageService
+                await self.image_service.update_llm_status(
+                    image_id=image.id,
+                    llm_response=result
+                )
+            except Exception as e:
+                await self.image_service.update_llm_status(
+                    image_id=image.id,
+                    llm_response=str(e),
+                    is_success=False
+                )
