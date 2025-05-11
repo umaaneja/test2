@@ -1,21 +1,29 @@
 from app.schemas.image import ImageInDB, ImageCreate, ImageWithAnalysis
 
-@router.get("/images/{image_id}/analysis", response_model=ImageWithAnalysis)
-def get_image_with_analysis(
-    image_id: int,
+
+
+@router.get("/projects/{project_id}/analysis", response_model=List[ImageWithAnalysis])
+def get_project_images_with_analysis(
+    project_id: int,
+    skip: int = 0,
+    limit: int = 100,
     db: Session = Depends(get_db)
 ):
     """
-    Get image details with analyzed LLM response data.
+    Get all images for a project with analyzed LLM response data.
     Returns:
-        - Image details
-        - Analysis of LLM response including:
-            - total_components
-            - reusable_components
-            - components_details (raw components data)
+        - List of image details with:
+            - Image metadata
+            - Analysis of LLM response including:
+                - total_components
+                - reusable_components
+                - components_details
+            - raw_llm_response
     """
-    db_image = get_image(db, image_id)
-    if not db_image:
-        raise HTTPException(status_code=404, detail="Image not found")
-    
-    return db_image
+    images = get_images_by_project(db, project_id=project_id, skip=skip, limit=limit)
+    if not images:
+        raise HTTPException(
+            status_code=404,
+            detail=f"No images found for project {project_id}"
+        )
+    return images
