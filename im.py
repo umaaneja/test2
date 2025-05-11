@@ -1,20 +1,10 @@
-image_processing.py
+from app.services.image_processing import ImageProcessingService
+  db = SessionLocal()
+    service = ImageProcessingService(db)
 
-class ImageProcessingService:
-    def __init__(self, db: Session):
-        self.db = db
-
-    async def mark_as_processed(
-        self,
-        image_id: int,
-        llm_response: str,
-        success: bool = True
-    ) -> bool:
-        """Service method for internal use only"""
-        updated = await update_llm_processing(
-            db=self.db,
-            image_id=image_id,
-            processed=success,
-            response=llm_response
+ success = await service.mark_as_processed(
+            image_id=test_image_id,
+            llm_response=test_response,
+            success=True
         )
-        return updated is not None
+        
