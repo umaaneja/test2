@@ -1,16 +1,18 @@
-async def update_llm_processing(
-    db: Session,
-    image_id: int,
-    processed: bool,
-    response: str
-) -> Optional[Image]:
-    """Direct database update without Pydantic overhead"""
-    image = db.query(Image).filter(Image.id == image_id).first()
-    if not image:
-        return None
-    
-    image.llm_processed = processed
-    image.llm_response = response
-    db.commit()
-    db.refresh(image)
-    return image
+class ImageProcessingService:
+    def __init__(self, db: Session):
+        self.db = db
+
+    async def mark_as_processed(
+        self,
+        image_id: int,
+        llm_response: str,
+        success: bool = True
+    ) -> bool:
+        """Service method for internal use only"""
+        updated = await update_llm_processing(
+            db=self.db,
+            image_id=image_id,
+            processed=success,
+            response=llm_response
+        )
+        return updated is not None
