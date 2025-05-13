@@ -1,18 +1,23 @@
-Discovery	Understand what exists	- Inventory of all content (pages, files, taxonomies, users, etc.)
-- Identify custom modules, templates, data structures
-- Identify 3rd-party dependencies
-Analysis	Understand how to migrate it	- Assess content quality and relevance
-- Identify what to migrate, transform, or archive
-- Map old structures (Drupal nodes, fields) to new (Hugo front matter, Laravel DB schema)
-- Identify challenges or blockers
+lidation & QA	- Confirm all content migrated correctly (spot-check + automation)
+- Test URLs, images, links, metadata
+- Validate Markdown/front matter (Hugo) or DB entries (Laravel)
+Functional Testing	- Ensure features (search, forms, filtering) work
+- Verify site builds and renders correctly (especially for static generators like Hugo)
+- Confirm user permissions and roles (for Laravel-based admin areas)
+Performance Check	- Page speed audits (Lighthouse, GTmetrix)
+- Cache and CDN setup for Hugo
+- Database/query optimization for Laravel
+SEO & Redirects	- Validate all 301 redirects from old Drupal URLs
+- Check canonical URLs, sitemaps, meta tags
+- Submit site to Google Search Console
+User Acceptance Testing	- Let editors/stakeholders review and sign off
+- Provide training if workflows or CMS have changed
+Monitoring & Logging	- Setup error monitoring/logging (e.g., Laravel logs, Netlify logs for Hugo)
+- Enable uptime monitoring (Pingdom, UptimeRobot)
+Content Freeze Release	- Lift content freeze (if applicable)
+- Allow users/editors to resume updates in new system
+Backup & Rollback Plan	- Snapshot of migrated site
+- Rollback strategy in case of critical issues
 
-Transformation	Convert content/data into the right format for the target system	- Convert HTML to Markdown (for Hugo)
-- Rewrite URLs and internal links
-- Extract and convert media files
-- Normalize data fields
-- Adjust content structure
-Execution	Actually move the data/content	- Import Markdown files into Hugo
-- Populate Laravel databases
-- Push media files to the new hosting
-- Run migration scripts
-- Trigger builds/deployments
+Validation (during migration)	Spot-checks while content is being moved
+Post-Migration	Full end-to-end check + real user testing and SEO readiness
