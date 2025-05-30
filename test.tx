@@ -1,21 +1,25 @@
+<?php
+
+namespace YourVendor\Paragraphs;
+
+use Illuminate\Support\ServiceProvider;
+
+class ParagraphsServiceProvider extends ServiceProvider
 {
-  "name": "your-vendor/paragraphs",
-  "description": "Reusable paragraph system for Laravel",
-  "type": "library",
-  "autoload": {
-    "psr-4": {
-      "YourVendor\\Paragraphs\\": "src/"
+    public function boot()
+    {
+        // Load views
+        $this->loadViewsFrom(__DIR__ . '/../resources/views', 'paragraphs');
+
+        // Load migrations
+        $this->loadMigrationsFrom(__DIR__ . '/../database/migrations');
+
+        // Register Blade component
+        \Illuminate\Support\Facades\Blade::component('paragraph-region', \YourVendor\Paragraphs\View\Components\ParagraphRegion::class);
     }
-  },
-  "extra": {
-    "laravel": {
-      "providers": [
-        "YourVendor\\Paragraphs\\ParagraphsServiceProvider"
-      ]
+
+    public function register()
+    {
+        //
     }
-  },
-  "require": {
-    "php": "^8.0",
-    "illuminate/support": "^8.0|^9.0|^10.0"
-  }
 }
