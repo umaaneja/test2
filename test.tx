@@ -1,33 +1,41 @@
-use App\Models\Page;
-use App\Models\GalleryBlock; // adjust namespace based on your app
+php artisan make:model Models/Page
 
-// Step 1: Create the gallery block with images
-$galleryBlock = GalleryBlock::create([
-    'title' => 'Our Summer Trip',
-    'images' => [
-        'gallery/image1.jpg',
-        'gallery/image2.jpg',
-        'gallery/image3.jpg'
-    ]
-]);
 
-// Step 2: Attach it to a specific page
-$page = Page::find(1); // Replace with actual page ID
-
-$page->paragraphs()->create([
-    'paragraphable_type' => get_class($galleryBlock),
-    'paragraphable_id' => $galleryBlock->id,
-    'region' => 'sidebar', // or 'content'
-    'position' => 1
-]);
+mkdir -p app/Models
+touch app/Models/Page.php
 
 
 
-<x-paragraph-region :page="$page" region="content" />
+<?php
 
+namespace App\Models;
 
-<div class="content">
-    @foreach($page->paragraphsByRegion('content') as $para)
-        @includeIf('paragraphs.' . strtolower(class_basename($para->paragraphable_type)), ['data' => $para->paragraphable])
-    @endforeach
-</div>
+use Illuminate\Database\Eloquent\Model;
+use App\Models\Paragraph;
+
+class Page extends Model
+{
+    protected $fillable = ['title', 'slug']; // add more fields as needed
+
+    public function paragraphs()
+    {
+        return $this->hasMany(Paragraph::class);
+    }
+
+    public function paragraphsByRegion(string $region)
+    {
+        return $this->paragraphs()
+            ->where('region', $region)
+            ->orderBy('position')
+            ->get();
+    }
+
+    public function availableRegions(): array
+    {
+        return $this->paragraphs()
+            ->select('region')
+            ->distinct()
+            ->pluck('region')
+            ->toArray();
+    }
+}
