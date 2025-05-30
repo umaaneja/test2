@@ -1,1 +1,10 @@
-We discussed the technical diagram generation AI solution. If the approach is clear, that’s great. If you need any further information, I’d be happy to connect and share more detail
+
+"repositories": [
+  {
+    "type": "path",
+    "url": "packages/YourVendor/Paragraphs",
+    "options": {
+      "symlink": true
+    }
+  }
+],
