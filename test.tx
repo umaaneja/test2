@@ -1,41 +1,24 @@
-php artisan make:model Models/Page
-
-
-mkdir -p app/Models
-touch app/Models/Page.php
-
-
+php artisan make:migration create_pages_table
 
 <?php
 
-namespace App\Models;
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
-use Illuminate\Database\Eloquent\Model;
-use App\Models\Paragraph;
-
-class Page extends Model
-{
-    protected $fillable = ['title', 'slug']; // add more fields as needed
-
-    public function paragraphs()
+return new class extends Migration {
+    public function up(): void
     {
-        return $this->hasMany(Paragraph::class);
+        Schema::create('pages', function (Blueprint $table) {
+            $table->id();
+            $table->string('title');
+            $table->string('slug')->unique();
+            $table->timestamps();
+        });
     }
 
-    public function paragraphsByRegion(string $region)
+    public function down(): void
     {
-        return $this->paragraphs()
-            ->where('region', $region)
-            ->orderBy('position')
-            ->get();
+        Schema::dropIfExists('pages');
     }
-
-    public function availableRegions(): array
-    {
-        return $this->paragraphs()
-            ->select('region')
-            ->distinct()
-            ->pluck('region')
-            ->toArray();
-    }
-}
+};
