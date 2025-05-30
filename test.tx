@@ -1,25 +1,22 @@
-<?php
+use App\Models\Page;
+use App\Models\GalleryBlock; // adjust namespace based on your app
 
-namespace YourVendor\Paragraphs;
+// Step 1: Create the gallery block with images
+$galleryBlock = GalleryBlock::create([
+    'title' => 'Our Summer Trip',
+    'images' => [
+        'gallery/image1.jpg',
+        'gallery/image2.jpg',
+        'gallery/image3.jpg'
+    ]
+]);
 
-use Illuminate\Support\ServiceProvider;
+// Step 2: Attach it to a specific page
+$page = Page::find(1); // Replace with actual page ID
 
-class ParagraphsServiceProvider extends ServiceProvider
-{
-    public function boot()
-    {
-        // Load views
-        $this->loadViewsFrom(__DIR__ . '/../resources/views', 'paragraphs');
-
-        // Load migrations
-        $this->loadMigrationsFrom(__DIR__ . '/../database/migrations');
-
-        // Register Blade component
-        \Illuminate\Support\Facades\Blade::component('paragraph-region', \YourVendor\Paragraphs\View\Components\ParagraphRegion::class);
-    }
-
-    public function register()
-    {
-        //
-    }
-}
+$page->paragraphs()->create([
+    'paragraphable_type' => get_class($galleryBlock),
+    'paragraphable_id' => $galleryBlock->id,
+    'region' => 'sidebar', // or 'content'
+    'position' => 1
+]);
