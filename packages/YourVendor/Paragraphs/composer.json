@@ -1,0 +1,21 @@
+{
+    "name": "your-vendor/paragraphs",
+    "description": "Reusable paragraphs system for Laravel",
+    "type": "library",
+    "autoload": {
+        "psr-4": {
+            "YourVendor\\Paragraphs\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "YourVendor\\Paragraphs\\ParagraphsServiceProvider"
+            ]
+        }
+    },
+    "require": {
+        "php": ">=8.0",
+        "illuminate/support": ">=9.0"
+    }
+}
