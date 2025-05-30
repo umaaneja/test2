@@ -23,3 +23,22 @@ class PageController extends Controller
         return view('pages.show', compact('page'));
     }
 }
+
+
+. Create the Blade View
+In resources/views/pages/show.blade.php:
+
+blade
+Copy
+Edit
+@extends('layouts.app')
+
+@section('content')
+    <h1>{{ $page->title }}</h1>
+
+    {{-- Render main content paragraphs --}}
+    <x-paragraph-region :page="$page" region="content" />
+
+    {{-- Render sidebar if needed --}}
+    <x-paragraph-region :page="$page" region="sidebar" />
+@endsection
