@@ -20,3 +20,11 @@ $page->paragraphs()->create([
     'region' => 'sidebar', // or 'content'
     'position' => 1
 ]);
+
+
+
+<div class="content">
+    @foreach($page->paragraphsByRegion('content') as $para)
+        @includeIf('paragraphs.' . strtolower(class_basename($para->paragraphable_type)), ['data' => $para->paragraphable])
+    @endforeach
+</div>
