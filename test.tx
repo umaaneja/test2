@@ -23,6 +23,9 @@ $page->paragraphs()->create([
 
 
 
+<x-paragraph-region :page="$page" region="content" />
+
+
 <div class="content">
     @foreach($page->paragraphsByRegion('content') as $para)
         @includeIf('paragraphs.' . strtolower(class_basename($para->paragraphable_type)), ['data' => $para->paragraphable])
