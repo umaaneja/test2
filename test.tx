@@ -1,1 +1,25 @@
-use YourVendor\Paragraphs\Models\Paragraph;
+use App\Http\Controllers\PageController;
+
+Route::get('/pages/{slug}', [PageController::class, 'show'])->name('pages.show')
+
+php artisan make:controller PageController
+Then in app/Http/Controllers/PageController.php:
+
+php
+Copy
+Edit
+namespace App\Http\Controllers;
+
+use App\Models\Page;
+use Illuminate\Http\Request;
+
+class PageController extends Controller
+{
+    public function show($slug)
+    {
+        // Just get the page; let the paragraph plugin load the paragraphs internally
+        $page = Page::where('slug', $slug)->firstOrFail();
+
+        return view('pages.show', compact('page'));
+    }
+}
