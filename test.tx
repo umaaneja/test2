@@ -1,44 +1,31 @@
-use App\Http\Controllers\PageController;
+// File: packages/YourVendor/Paragraphs/src/Components/ParagraphRegion.php
 
-Route::get('/pages/{slug}', [PageController::class, 'show'])->name('pages.show')
+namespace YourVendor\Paragraphs\Components;
 
-php artisan make:controller PageController
-Then in app/Http/Controllers/PageController.php:
+use Illuminate\View\Component;
+use YourVendor\Paragraphs\Models\Paragraph;
 
-php
-Copy
-Edit
-namespace App\Http\Controllers;
-
-use App\Models\Page;
-use Illuminate\Http\Request;
-
-class PageController extends Controller
+class ParagraphRegion extends Component
 {
-    public function show($slug)
-    {
-        // Just get the page; let the paragraph plugin load the paragraphs internally
-        $page = Page::where('slug', $slug)->firstOrFail();
+    public $paragraphs;
 
-        return view('pages.show', compact('page'));
+    public function __construct($page, string $region)
+    {
+        $this->paragraphs = $page->paragraphs()->region($region)->get();
+    }
+
+    public function render()
+    {
+        return view('paragraphs::components.paragraph-region');
     }
 }
 
+// Step 5: Blade View
+// File: packages/YourVendor/Paragraphs/resources/views/components/paragraph-region.blade.php
 
-. Create the Blade View
-In resources/views/pages/show.blade.php:
-
-blade
-Copy
-Edit
-@extends('layouts.app')
-
-@section('content')
-    <h1>{{ $page->title }}</h1>
-
-    {{-- Render main content paragraphs --}}
-    <x-paragraph-region :page="$page" region="content" />
-
-    {{-- Render sidebar if needed --}}
-    <x-paragraph-region :page="$page" region="sidebar" />
-@endsection
+@foreach($paragraphs as $para)
+    @php
+        $viewName = 'paragraphs.' . strtolower(class_basename($para->paragraphable_type));
+    @endphp
+    @includeIf($viewName, ['data' => $para->paragraphable, 'region' => $para->region])
+@endforeach
