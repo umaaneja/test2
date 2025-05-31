@@ -20,3 +20,4 @@ You are helping me generate a Laravel paragraph type. I'm migrating a Drupal sit
    - This model must be able to be related to the `Paragraph` model via `morphMany`
    - Must support creating/updating via paragraph CRUD
 6. Optional: Include a Seeder that creates one sample GalleryBlock
+5. Don't do anything in the parent paragraph plugin. This should be a fully self-contained paragraph type.
