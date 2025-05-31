@@ -1,1 +1,1 @@
-Blade::component('paragraph-region', ParagraphRegion::class);
+use Illuminate\Support\Facades\Blade;
