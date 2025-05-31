@@ -1,1 +1,22 @@
-use Illuminate\Support\Facades\Blade;
+You are helping me generate a Laravel paragraph type. I'm migrating a Drupal site to Laravel, and each Drupal paragraph maps to a Laravel model with its own table, form, and Blade layout.
+
+## Paragraph Type: GalleryBlock
+
+## Fields:
+- title (string)
+- description (text)
+- images (json) — array of image paths
+- background_color (string, optional)
+
+## Requirements:
+1. Create a model: `App\Models\GalleryBlock`
+2. Create a migration for the table `gallery_blocks`
+3. Add `$fillable` for all fields
+4. Create a Blade view: `resources/views/paragraphs/galleryblock.blade.php`
+   - Render title and description
+   - Loop through images and show them in a Bootstrap grid
+   - Use background_color as a div style if set
+5. Integrate with the Paragraph plugin (polymorphic):
+   - This model must be able to be related to the `Paragraph` model via `morphMany`
+   - Must support creating/updating via paragraph CRUD
+6. Optional: Include a Seeder that creates one sample GalleryBlock
