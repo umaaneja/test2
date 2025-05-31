@@ -1,31 +1,26 @@
-// File: packages/YourVendor/Paragraphs/src/Components/ParagraphRegion.php
+// Step 3: Paragraph Model
+// File: packages/YourVendor/Paragraphs/src/Models/Paragraph.php
 
-namespace YourVendor\Paragraphs\Components;
+namespace YourVendor\Paragraphs\Models;
 
-use Illuminate\View\Component;
-use YourVendor\Paragraphs\Models\Paragraph;
+use Illuminate\Database\Eloquent\Model;
 
-class ParagraphRegion extends Component
+class Paragraph extends Model
 {
-    public $paragraphs;
+    protected $fillable = ['page_id', 'paragraphable_type', 'paragraphable_id', 'region', 'position'];
 
-    public function __construct($page, string $region)
+    public function paragraphable()
     {
-        $this->paragraphs = $page->paragraphs()->region($region)->get();
+        return $this->morphTo();
     }
 
-    public function render()
+    public function page()
     {
-        return view('paragraphs::components.paragraph-region');
+        return $this->belongsTo(\App\Models\Page::class);
+    }
+
+    public function scopeRegion($query, string $region)
+    {
+        return $query->where('region', $region)->orderBy('position');
     }
 }
-
-// Step 5: Blade View
-// File: packages/YourVendor/Paragraphs/resources/views/components/paragraph-region.blade.php
-
-@foreach($paragraphs as $para)
-    @php
-        $viewName = 'paragraphs.' . strtolower(class_basename($para->paragraphable_type));
-    @endphp
-    @includeIf($viewName, ['data' => $para->paragraphable, 'region' => $para->region])
-@endforeach
