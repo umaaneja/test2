@@ -7,3 +7,15 @@ You are converting a Drupal paragraph Twig template into a Laravel Blade compone
 
 ## Drupal Twig Template:
 <div class="hero-banner"> <h1>{{ content.field_title }}</h1> <p>{{ content.field_subtitle }}</p> {% if content.field_image %} <img src="{{ file_url(content.field_image.0['#item'].entity.uri.value) }}" /> {% endif %} </div> ```
+
+
+Instructions for conversion:
+
+Convert the Twig template into a Laravel Blade template.
+Assume the Blade template receives a variable $heroBanner of type App\Models\HeroBanner.
+Replace Drupal’s content.field_* variables with appropriate Laravel model properties ($heroBanner->title, $heroBanner->subtitle, etc.).
+Replace file_url() with Laravel’s URL helper or an image URL accessor on the model ($heroBanner->image_url).
+Use proper Blade syntax: {{ }} for variables, @if directive for conditional rendering.
+Ensure the image tag includes an alt attribute for accessibility.
+The final Blade template should be clean, readable, and idiomatic Laravel.
+
