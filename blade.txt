@@ -1,0 +1,82 @@
+You are helping me convert a Drupal 8/9/10 theme to a Laravel Blade-based frontend. I want to migrate all Twig templates, CSS/JS assets, and theme configurations into the Laravel ecosystem. Use Laravel best practices including layouts, Blade partials/components, and Vite/Mix for assets.
+
+Here's what I need:
+
+1. **Twig to Blade Template Conversion**
+   - Convert `html.html.twig` to `resources/views/layouts/app.blade.php`
+     - Map `{{ page_top }}`, `{{ page.content }}`, `{{ page_bottom }}` to `@yield` or `@section`
+   - Convert `page.html.twig` to a child view that extends the layout
+     - Map Drupal regions (e.g., `page.header`, `page.content`, `page.footer`) to Blade `@section` or `@include`
+   - Convert `node.html.twig` and `block.html.twig` to Blade components (`resources/views/components/...`)
+     - Example: `<x-node :title="$title" :body="$body" />`
+
+2. **Assets (CSS/JS)**
+   - Copy all files from `themes/custom/THEME_NAME/css`, `js`, `images` to Laravel's `public/` folder or `resources/`
+     - For SCSS/JS: move to `resources/css`, `resources/js`, use Laravel Vite or Mix
+   - Create or update `vite.config.js` to handle asset compilation
+   - Generate Blade includes for scripts and styles (`partials/head.blade.php`, `partials/scripts.blade.php`)
+
+3. **Regions and Layouts**
+   - Extract region names from `.info.yml` and convert them to Blade layout sections
+   - For each region (e.g., `header`, `sidebar_first`, `content`, `footer`), create partials in `resources/views/partials/`
+
+4. **Theme Configuration**
+   - Convert `.info.yml` to `config/theme.php` (custom config file)
+     - Include theme name, regions, libraries
+   - Convert `.libraries.yml` to `vite.config.js` or reference from Blade
+     - Extract CSS/JS file paths and link them using `@vite`
+
+5. **Image and Favicon Handling**
+   - Copy favicon, logo, and images from the theme folder to Laravel's `public/` directory
+   - Update all image references inside Blade templates to use `asset('...')` or Vite helpers
+
+6. **Optional: Dynamic Content**
+   - For dynamic sections (like `node`, `block`), stub out Blade components and include mock data variables (`$title`, `$content`, `$links`)
+   - Maintain support for flexible layout and translation (`{{ __('text') }}`)
+
+7. **Drupal Library System Placeholder Handling**
+   - Replace all instances of `<css-placeholder>` or `<js-placeholder>` in Twig with:
+     `@vite([...])` in Blade
+   - Parse `.libraries.yml` entries (CSS/JS) and load them in `vite.config.js`
+   - Output Vite-compatible includes using `@vite([...])` in Blade templates
+
+8. **Title and Dynamic Class Conversion**
+   - Convert `<title>{{ head_title }}</title>` to Blade:
+     `@yield('title', 'Default Site Title')` in layout
+     `@section('title', 'Page Title')` in child views
+   - Convert Twig `{% set body_classes = [...] %}` into:
+     a PHP array in Blade (`@php`) or passed from the controller
+   - Replace `{{ body_classes|join(' ') }}` with `{{ implode(' ', $body_classes) }}` or `{{ $bodyClass }}`
+
+9. **Twig Block Conversion**
+   - Convert `{% block name %}...{% endblock %}` into Blade `@yield('name')` in layout files
+   - Convert `{{ content }}` inside those blocks into `@section('name')` in child views
+   - Maintain layout-child relationship using `@extends('layouts.app')`
+
+10. **Drupal theme_preprocess_page() Mapping**
+   - Convert `theme_preprocess_page()` variables to controller-passed variables in Laravel
+     Example: `$variables['img_1']` becomes `'img_1' => URL::to('/images/img1.png')` in controller
+   - If used across multiple views, register in a View Composer using `View::composer('*', ...)`
+   - Use `{{ $variable }}` in Blade templates
+
+Please output:
+- Blade template files for layout and key regions
+- Blade components for nodes and blocks
+- Laravel config file for the theme (`config/theme.php`)
+- Updated `vite.config.js` with the assets
+- Example Laravel route and controller if needed to test the theme
+
+
+For each Drupal preprocess function like:
+
+  function mytheme_preprocess_node__article(&$variables) { ... }
+
+1. Identify the content type suffix (e.g., `article`, `page`)
+2. Create a corresponding Blade template:
+     `resources/views/nodes/{type}.blade.php`
+3. Extract all `$variables['...']` and map them to controller logic
+   - Use model relationships to pull equivalent Laravel data
+   - Example: `$variables['author_name'] = $node->getOwner()` becomes `$article->author->name`
+4. Output controller functions that return the view with necessary data
+5. In the layout, include the node view using:
+     `@includeIf('nodes.' . $contentType)`
